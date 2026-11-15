@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bd-income-tax"
+version = "0.1.0"
+description = "Bangladesh individual income tax calculator: tax bands, investment rebate, minimum tax, lakh/Bangla formatting and a CLI."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Sarif Mia" }]
+keywords = ["bangladesh", "income-tax", "tax", "nbr", "bdt", "taka", "calculator"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Topic :: Office/Business :: Financial :: Accounting",
+    "Natural Language :: Bengali",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+bd-income-tax = "bd_income_tax.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/sarif-mia/bd-income-tax"
+Source = "https://github.com/sarif-mia/bd-income-tax"
+Tracker = "https://github.com/sarif-mia/bd-income-tax/issues"
+"Web calculator" = "https://github.com/sarif-mia/bd-income-tax-calculator"
+
+[tool.hatch.build.targets.sdist]
+include = ["bd_income_tax", "tests", "README.md", "LICENSE"]
+
+[tool.pytest.ini_options]
+addopts = "--doctest-modules"
+testpaths = ["tests", "bd_income_tax"]

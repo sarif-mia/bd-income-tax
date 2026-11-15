@@ -9,15 +9,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-      - run: pip install -e ".[test]"
-      - run: pytest -q
+      - uses: astral-sh/setup-uv@v5
+      # uv supplies the interpreter, so older versions work on new runner images
+      - run: uv run --python ${{ matrix.python-version }} --extra test pytest -q
   build:
     runs-on: ubuntu-latest
     steps:
